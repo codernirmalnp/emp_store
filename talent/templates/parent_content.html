@@ -1,0 +1,6 @@
+<h1>Parental Consent for {{ talent.full_name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Consent</button>
+</form>

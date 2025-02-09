@@ -1,0 +1,249 @@
+<!-- talent/templates/homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Are Stars</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero .cta-button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* Featured Talents Section */
+        .featured-talents {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .featured-talents h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .talent-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .talent-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .talent-card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .talent-card a {
+            color: #ff6600;
+            font-weight: bold;
+        }
+
+        /* Latest Blog Posts Section */
+        .latest-posts {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .latest-posts h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .post-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .post-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .post-card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .post-card a {
+            color: #ff6600;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #ff6600;
+            margin: 0 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .talent-card, .post-card {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="/">We Are Stars</a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/blog/">Blog</a>
+            <a href="/register/">Register</a>
+            <a href="/profile/">Profile</a>
+            <a href="/subscribe/">Subscribe</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to We Are Stars</h1>
+        <p>Connecting talent with casting professionals worldwide.</p>
+        <a href="/register/" class="cta-button">Join Now</a>
+    </div>
+
+    <!-- Featured Talents Section -->
+    <div class="featured-talents">
+        <h2>Featured Talents</h2>
+        {% for talent in featured_talents %}
+            <div class="talent-card">
+                <h3>{{ talent.full_name }}</h3>
+                <p>{{ talent.bio|truncatewords:20 }}</p>
+                <a href="/profile/{{ talent.user.id }}/">View Profile</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Latest Blog Posts Section -->
+    <div class="latest-posts">
+        <h2>Latest Blog Posts</h2>
+        {% for post in latest_posts %}
+            <div class="post-card">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content|truncatewords:30 }}</p>
+                <a href="/blog/{{ post.id }}/">Read More</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2023 We Are Stars. All rights reserved.</p>
+        <p>
+            Follow us: 
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://plus.google.com" target="_blank">Google+</a>
+        </p>
+    </div>
+</body>
+</html>

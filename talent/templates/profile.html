@@ -1,0 +1,12 @@
+<h1>Profile</h1>
+<p>Name: {{ talent.full_name }}</p>
+<p>Age: {{ talent.age }}</p>
+<p>Bio: {{ talent.bio }}</p>
+<p>Skills: {{ talent.skills }}</p>
+{% if talent.is_minor %}
+    <p>Parental Consent: {{ talent.consent_given|yesno:"Given,Not Given" }}</p>
+{% endif %}
+<div>
+    <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}&text=Check out {{ talent.full_name }} on We Are Stars!" target="_blank">Share on Twitter</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">Share on Facebook</a>
+</div>
